@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Cursos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-list> 
+    <ion-item-sliding *ngFor="let curso of model.cursos">
+      <ion-item>
+          <div *ngFor="let field of curso.fields">
+              <div *ngIf="field.isTitle"><b>{{ field.value }}</b><br></div>
+              <div *ngIf="field.isVisibleInList&&!field.isTitle">{{ field.value }}<br></div>
+          </div>
+          
+      </ion-item>
+      <ion-item-options>
+        <button *ngIf="!delegate" ion-button color="primary" (click)="itemSelected(curso)"><ion-icon name="create"></ion-icon></button>
+        <button *ngIf="!delegate" ion-button color="danger" (click)="removeCurso(curso)"><ion-icon name="trash"></ion-icon></button>
+        <button *ngIf="delegate" ion-button color="primary" (click)="itemSelectedToMaster(curso)"><ion-icon name="add"></ion-icon></button>
+      
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab bottom right *ngIf="!delegate">
+    <button ion-fab (click)="pressAddCurso()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

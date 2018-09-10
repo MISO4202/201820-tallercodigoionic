@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Estudiantes
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-list> 
+    <ion-item-sliding *ngFor="let estudiante of model.estudiantes">
+      <ion-item>
+          <div *ngFor="let field of estudiante.fields">
+              <div *ngIf="field.isTitle"><b>{{ field.value }}</b><br></div>
+              <div *ngIf="field.isVisibleInList&&!field.isTitle">{{ field.value }}<br></div>
+          </div>
+          
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="primary" (click)="itemSelected(estudiante)"><ion-icon name="create"></ion-icon></button>
+        <button ion-button color="danger" (click)="removeEstudiante(estudiante)"><ion-icon name="trash"></ion-icon></button>
+      
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab bottom right>
+    <button ion-fab (click)="pressAddEstudiante()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Profesor
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-item *ngFor="let field of profesor.fields;">
+    <ion-label>{{field.name}}<span *ngIf="field.isMandatory">*</span></ion-label>
+    <ion-input *ngIf="field.isString()" type="text" [(ngModel)]="field.value" name="field.name"></ion-input>
+    <ion-input *ngIf="field.isNumber()" type="number" [(ngModel)]="field.value" name="field.name"></ion-input>
+    <ion-input *ngIf="field.isDate()" type="date" [(ngModel)]="field.value" name="field.name"></ion-input>
+    <ion-checkbox *ngIf="field.isBoolean()" [(ngModel)]="field.value"></ion-checkbox>
+  </ion-item>
+  <p>* Campos requeridos</p>
+  <button ion-button full (click)="guardar()">GUARDAR</button>
+  
+
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        Profesores
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    
+    <ion-list> 
+      <ion-item-sliding *ngFor="let profesor of model.profesores">
+        <ion-item>
+            <div *ngFor="let field of profesor.fields">
+                <div *ngIf="field.isTitle"><b>{{ field.value }}</b><br></div>
+                <div *ngIf="field.isVisibleInList&&!field.isTitle">{{ field.value }}<br></div>
+            </div>
+            
+        </ion-item>
+        <ion-item-options>
+          <button ion-button color="primary" (click)="itemSelected(profesor)"><ion-icon name="create"></ion-icon></button>
+          <button ion-button color="danger" (click)="removeProfesor(profesor)"><ion-icon name="trash"></ion-icon></button>
+        
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-fab bottom right>
+      <button ion-fab (click)="pressAddProfesor()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+  </ion-content>

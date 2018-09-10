@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{estudiante.getTitleField().getValue()}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-item *ngFor="let field of estudiante.fields;">
+    <ion-label *ngIf="!field.isTitle">{{field.name}}</ion-label>
+    <ion-input *ngIf="field.isString()&&!field.isTitle" type="text" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
+    <ion-input *ngIf="field.isNumber()&&!field.isTitle" type="number" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
+    <ion-input *ngIf="field.isDate()&&!field.isTitle" type="date" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
+    <ion-checkbox *ngIf="field.isBoolean()&&!field.isTitle" [(ngModel)]="field.value" [disabled]="!field.isEditable"></ion-checkbox>
+  </ion-item>
+  
+
+  <ion-list-header no-lines no-padding>
+    <!-- Toggle Button -->
+    <button ion-item (click)="toggleSectionDirecciones()" detail-none [ngClass]="{'section-active': estudiante.direccionesOpen, 'section': !estudiante.direccionesOpen}">
+      <ion-icon item-left name="arrow-forward" *ngIf="!estudiante.direccionesOpen"></ion-icon>
+      <ion-icon item-left name="arrow-down" *ngIf="estudiante.direccionesOpen"></ion-icon>
+      <ion-icon item-right name="add" (click)="pressAddDireccion()"></ion-icon>
+        Direcciones
+    </button>
+
+    <ion-list *ngIf="estudiante.direccionesOpen" no-lines>
+      <!-- Second Level -->
+      <ion-item-sliding *ngFor="let direccion of estudiante.direcciones;">
+          <ion-item>
+              <div *ngFor="let field of direccion.fields">
+                  <div *ngIf="field.isTitle"><b>{{ field.value }}</b><br></div>
+                  <div *ngIf="field.isVisibleInList&&!field.isTitle">{{ field.value }}<br></div>
+              </div>
+              
+          </ion-item>
+          <ion-item-options>
+            <button ion-button color="primary" (click)="itemSelectedDireccion(direccion)"><ion-icon name="create"></ion-icon></button>
+            <button ion-button color="danger" (click)="removeDireccion(direccion)"><ion-icon name="trash"></ion-icon></button>
+          
+          </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    
+  </ion-list-header>
+
+  <ion-list-header no-lines no-padding>
+      <!-- Toggle Button -->
+      <button ion-item (click)="toggleSectionCursos()" detail-none [ngClass]="{'section-active': estudiante.cursosOpen, 'section': !estudiante.cursosOpen}">
+        <ion-icon item-left name="arrow-forward" *ngIf="!estudiante.cursosOpen"></ion-icon>
+        <ion-icon item-left name="arrow-down" *ngIf="estudiante.cursosOpen"></ion-icon>
+        <ion-icon item-right name="add" (click)="pressAddCurso()"></ion-icon>
+          Cursos
+      </button>
+  
+      <ion-list *ngIf="estudiante.cursosOpen" no-lines>
+        <!-- Second Level -->
+        <ion-item-sliding *ngFor="let curso of estudiante.cursos;">
+            <ion-item>
+                <div *ngFor="let field of curso.fields">
+                    <div *ngIf="field.isTitle"><b>{{ field.value }}</b><br></div>
+                    <div *ngIf="field.isVisibleInList&&!field.isTitle">{{ field.value }}<br></div>
+                </div>
+                
+            </ion-item>
+            <ion-item-options>
+              <button ion-button color="primary" (click)="itemSelectedCurso(curso)"><ion-icon name="create"></ion-icon></button>
+              <button ion-button color="danger" (click)="removeCurso(curso)"><ion-icon name="trash"></ion-icon></button>
+            
+            </ion-item-options>
+        </ion-item-sliding>
+        
+      </ion-list>
+      
+    </ion-list-header>
+
+</ion-content>

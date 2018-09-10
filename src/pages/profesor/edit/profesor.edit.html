@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        {{profesor.getTitleField().getValue()}}
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    
+    <ion-item *ngFor="let field of profesor.fields;">
+      <ion-label *ngIf="!field.isTitle">{{field.name}}</ion-label>
+      <ion-input *ngIf="field.isString()&&!field.isTitle" type="text" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
+      <ion-input *ngIf="field.isNumber()&&!field.isTitle" type="number" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
+      <ion-input *ngIf="field.isDate()&&!field.isTitle" type="date" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
+      <ion-checkbox *ngIf="field.isBoolean()&&!field.isTitle" [(ngModel)]="field.value" [disabled]="!field.isEditable"></ion-checkbox>
+    </ion-item>
+    
+  
+    <ion-list-header no-lines no-padding>
+        <!-- Toggle Button -->
+        <button ion-item (click)="toggleSectionDirecciones()" detail-none [ngClass]="{'section-active': profesor.direccionesOpen, 'section': !profesor.direccionesOpen}">
+          <ion-icon item-left name="arrow-forward" *ngIf="!profesor.direccionesOpen"></ion-icon>
+          <ion-icon item-left name="arrow-down" *ngIf="profesor.direccionesOpen"></ion-icon>
+          <ion-icon item-right name="add" (click)="pressAddDireccion()"></ion-icon>
+            Direcciones
+        </button>
+    
+        <ion-list *ngIf="profesor.direccionesOpen" no-lines>
+          <!-- Second Level -->
+          <ion-item-sliding *ngFor="let direccion of profesor.direcciones;">
+              <ion-item>
+                  <div *ngFor="let field of direccion.fields">
+                      <div *ngIf="field.isTitle"><b>{{ field.value }}</b><br></div>
+                      <div *ngIf="field.isVisibleInList&&!field.isTitle">{{ field.value }}<br></div>
+                  </div>
+                  
+              </ion-item>
+              <ion-item-options>
+                <button ion-button color="primary" (click)="itemSelectedDireccion(direccion)"><ion-icon name="create"></ion-icon></button>
+                <button ion-button color="danger" (click)="removeDireccion(direccion)"><ion-icon name="trash"></ion-icon></button>
+              
+              </ion-item-options>
+          </ion-item-sliding>
+          
+        </ion-list>
+        
+      </ion-list-header>
+  
+  </ion-content>
+  

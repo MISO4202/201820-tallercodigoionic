@@ -1,0 +1,7 @@
+{
+  "name": "noorapp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{curso.getTitleField().getValue()}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-item *ngFor="let field of curso.fields;">
+    <ion-label *ngIf="!field.isTitle">{{field.name}}</ion-label>
+    <ion-input *ngIf="field.isString()&&!field.isTitle" type="text" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
+    <ion-input *ngIf="field.isNumber()&&!field.isTitle" type="number" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
+    <ion-input *ngIf="field.isDate()&&!field.isTitle" type="date" [(ngModel)]="field.value" name="field.name" [disabled]="!field.isEditable"></ion-input>
+    <ion-checkbox *ngIf="field.isBoolean()&&!field.isTitle" [(ngModel)]="field.value" [disabled]="!field.isEditable"></ion-checkbox>
+  </ion-item>
+
+</ion-content>
