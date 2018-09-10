@@ -35,6 +35,15 @@ ionic serve
 Si se quiere ejecutar el proyecto en android o ios es necesario tener instalado el SDK de Android y Xcode en Mac.
 
 Android
+```
+$ ionic cordova run android
+```
+
+iOS (Simulador)
+```
+$ ionic cordova build ios
+$ ionic cordova emulate ios
+```
 
 ## Built With
 
