@@ -50,7 +50,7 @@ Por definir
 
 ## Authors
 
-* **Kevin Sanchez** - *Initial work* - [kedavidsa](https://github.com/kedavidsa)
+* **Kevin Sanchez** - *Initial work* - [kedavidsa](https://github.com/kedavidsa) para el curso MISO4202 de la Universidad de los Andes
 
 ## License
 
